@@ -7,11 +7,19 @@ import javax.persistence.*;
 
 public class City {
 	@Id
-	@Column
+	@Column(name="ID")
 	private int id;
-	private String nameString;
-	private String countryCodeString;
-	private String districtString;
+	
+	@Column(name="Name")
+	private String name;
+	
+	@Column(name="CountryCode")
+	private String countryCode;
+	
+	@Column(name="District")
+	private String district;
+	
+	@Column(name="Population")
 	private int population;
 
 	public int getId() {
@@ -22,28 +30,28 @@ public class City {
 		this.id = id;
 	}
 
-	public String getNameString() {
-		return nameString;
+	public String getName() {
+		return name;
 	}
 
-	public void setNameString(String nameString) {
-		this.nameString = nameString;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getCountryCodeString() {
-		return countryCodeString;
+	public String getCountryCode() {
+		return countryCode;
 	}
 
-	public void setCountryCodeString(String countryCodeString) {
-		this.countryCodeString = countryCodeString;
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
-	public String getDistrictString() {
-		return districtString;
+	public String getDistrict() {
+		return district;
 	}
 
-	public void setDistrictString(String districtString) {
-		this.districtString = districtString;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
 	public int getPopulation() {
@@ -53,4 +61,6 @@ public class City {
 	public void setPopulation(int population) {
 		this.population = population;
 	}
+
+	
 }

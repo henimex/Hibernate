@@ -19,15 +19,56 @@ public class Main {
 		try {
 			session.beginTransaction();
 			
-			List<City> cities = session.createQuery("from City").getResultList();
-			for (City city : cities) {
-				System.out.println(city.getName());
-			}
+			//CRUD Operation
+			SelectOperation(session);
+			InsertOperation(session);
+			UpdateOperation(session);
+			DeleteOperation(session);
 			
 			session.getTransaction().commit();
+			
 		} finally {
 			factory.close();
 		}
+	}
+	
+	public static void SelectOperation(Session session) {
+		String queryOne = "FROM City c WHERE c.countryCode='TUR' AND c.district='Istanbul'";
+		String queryTwo = "FROM City c WHERE c.name LIKE '%kar%'";
+
+		List<City> cities = session.createQuery(queryTwo).getResultList();
+		for (City city : cities) {
+			System.out.println(city.getName());
+		}
+	}
+	
+	public static void InsertOperation(Session session) {
+		City city = new City();
+		city.setName("Sivrihisar1");
+		city.setCountryCode("TUR");
+		city.setDistrict("Anadolu");
+		city.setPopulation(1000);
+		
+		session.save(city);
+		System.out.println("City Added");
+	}
+	
+	public static void UpdateOperation(Session session) {
+		City takeCity = session.get(City.class, 4086);
+		System.out.println(takeCity.getName());
+		
+		takeCity.setName("Sivrihisar2");
+		takeCity.setCountryCode("TUR");
+		takeCity.setDistrict("Anadolu");
+		takeCity.setPopulation(20000);
+		
+		session.save(takeCity);
+		System.out.println("City Updated as " + takeCity.getName());
+	}
+	
+	public static void DeleteOperation(Session session) {
+		City deleteCity = session.get(City.class, 4086);
+		session.delete(deleteCity);
 	}
 
 }
